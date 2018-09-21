@@ -22,6 +22,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 public class Person extends ConcurrencySafeEntity {
+    private static final long serialVersionUID = 1L;
     private TenantId tenantId;
     private FullName fullName;
     private ContactInformation contactInformation;

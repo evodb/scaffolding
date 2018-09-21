@@ -20,6 +20,7 @@ package io.evodb.idaccess.domain.model.identity;
 import io.evodb.common.domain.model.PersistibleValueObject;
 
 public class GroupMember extends PersistibleValueObject<GroupMember> {
+    private static final long serialVersionUID = 1L;
     private String name;
     private TenantId tenantId;
     private GroupMemberType groupMemberType;
