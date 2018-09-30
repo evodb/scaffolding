@@ -26,20 +26,12 @@ public abstract class ConcurrencySafeEntity extends Entity {
         super();
     }
 
-    public int concurrencyVersion() {
+    public int getConcurrencyVersion() {
         return concurrencyVersion;
     }
 
     public void setConcurrencyVersion(int aVersion) {
-        failWhenConcurrencyViolation(aVersion);
         concurrencyVersion = aVersion;
-    }
-
-    public void failWhenConcurrencyViolation(int aVersion) {
-        if (aVersion != concurrencyVersion()) {
-            throw new IllegalStateException(
-                "Concurrency Violation: Stale data detected. Entity was already modified.");
-        }
     }
 
 }

@@ -67,6 +67,10 @@ public class DomainEventPublisher {
         return subscribers;
     }
 
+    private void reset() {
+        subscribers.clear();
+    }
+
     public boolean hasSubscribers() {
         return !subscribers.isEmpty();
     }

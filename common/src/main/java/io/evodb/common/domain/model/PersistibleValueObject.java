@@ -19,8 +19,16 @@ package io.evodb.common.domain.model;
 
 public abstract class PersistibleValueObject<T> extends AbstractValueObject<T> {
     private static final long serialVersionUID = 1L;
+    private long id;
 
     public PersistibleValueObject() {
-        super();
+    }
+
+    protected long id() {
+        return id;
+    }
+
+    protected void setId(long anId) {
+        id = anId;
     }
 }

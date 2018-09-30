@@ -31,7 +31,6 @@ public class GroupMember extends PersistibleValueObject<GroupMember> {
         setGroupMemberType(groupMemberType);
     }
 
-
     public String name() {
         return name;
     }

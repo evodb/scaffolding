@@ -19,17 +19,23 @@ package io.evodb.idaccess.domain.model.identity;
 
 import io.evodb.common.domain.model.ConcurrencySafeEntity;
 import java.util.Date;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+
 public class User extends ConcurrencySafeEntity {
+    private static final long serialVersionUID = 1L;
+
     private String username;
+
     private String password;
+
     private TenantId tenantId;
+
     private Person person;
+
     private boolean active;
+
     private Date registerTime;
 
     public User(TenantId aTenantId, String aUsername, String aPassword, Person aPerson, boolean anActive) {

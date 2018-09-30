@@ -30,7 +30,7 @@ public abstract class PersistibleDomainObject extends AssertionConcern implement
         setId(-1);
     }
 
-    protected long id() {
+    public long getId() {
         return id;
     }
 

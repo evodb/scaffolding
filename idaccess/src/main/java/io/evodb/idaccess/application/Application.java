@@ -15,25 +15,16 @@
  *
  */
 
-package io.evodb.idaccess.domain.model.identity;
+package io.evodb.idaccess.application;
 
-import io.evodb.common.domain.model.AbstractId;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@Embeddable
-public class TenantId extends AbstractId {
-    private static final long serialVersionUID = 1L;
-
-    public TenantId(String anId) {
-        super(anId);
-    }
-
-    @Override
-    @Column(name = "tenant_id")
-    public @NotNull @Size(max = 100) String getId() {
-        return super.getId();
+@SpringBootApplication
+@EntityScan(basePackages="io.evodb.idaccess.domain.model")
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
     }
 }

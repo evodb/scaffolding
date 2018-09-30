@@ -15,25 +15,21 @@
  *
  */
 
-package io.evodb.idaccess.domain.model.identity;
+package io.evodb.idaccess.infrastructure.persistence;
 
-import io.evodb.common.domain.model.AbstractId;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import io.evodb.common.domain.model.ConcurrencySafeEntity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Version;
 
-@Embeddable
-public class TenantId extends AbstractId {
-    private static final long serialVersionUID = 1L;
+public class HibernateConcurrencySafeEngity extends ConcurrencySafeEntity {
 
-    public TenantId(String anId) {
-        super(anId);
-    }
-
+    @Version
     @Override
-    @Column(name = "tenant_id")
-    public @NotNull @Size(max = 100) String getId() {
-        return super.getId();
+    public int getConcurrencyVersion() {
+        return super.getConcurrencyVersion();
     }
+
+
 }

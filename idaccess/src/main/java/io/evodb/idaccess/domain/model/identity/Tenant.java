@@ -17,69 +17,52 @@
 
 package io.evodb.idaccess.domain.model.identity;
 
-import io.evodb.common.domain.model.ConcurrencySafeEntity;
+import io.evodb.idaccess.infrastructure.persistence.HibernateConcurrencySafeEngity;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
 @Entity
-public class Tenant extends ConcurrencySafeEntity {
+@Validated
+public class Tenant extends HibernateConcurrencySafeEngity {
     private static final long serialVersionUID = 1L;
 
+    @Setter
+    @Getter
     private boolean active;
-    private String description;
-    private String name;
-    private TenantId tenantId;
+
+    @Setter
+    @Getter
+    private @Size(max = 100) String description;
+
+    @Setter
+    @Getter
+    private @Size(min = 1, max = 100) String name;
+
+    @Embedded
+    @Setter
+    @Getter
+    private @NotNull TenantId tenantId;
 
     public Tenant(TenantId aTenantId, String aName, String aDescription, boolean anActive) {
-        setTenanId(aTenantId);
+        setTenantId(aTenantId);
         setActive(anActive);
         setName(aName);
         setDescription(aDescription);
     }
 
-    public String description() {
-        return description;
-    }
-
-    public String name() {
-        return name;
-    }
-
-    public TenantId tenantId() {
-        return tenantId;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    protected void setActive(boolean aFlag) {
-        active = aFlag;
-    }
-
-    protected void setDescription(String aDescription) {
-        assertArgumentNotEmpty(aDescription, "The tenant description is required.");
-        assertArgumentLength(aDescription, 1, 100, "The tenant description must be 100 characters or less.");
-        description = aDescription;
-    }
-
-    protected void setTenanId(TenantId aTenanId) {
-        assertArgumentNotNull(aTenanId, "The TenantId is required.");
-        tenantId = aTenanId;
-    }
-
-    protected void setName(String aName) {
-        assertArgumentNotEmpty(aName, "The tenant name is required.");
-        assertArgumentLength(aName, 1, 100, "The tenant description must be 100 characters or less.");
-        name = aName;
-    }
-
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Override
-    protected void setId(long anId) {
-        super.setId(anId);
+    public long getId() {
+        return super.getId();
     }
+
 }

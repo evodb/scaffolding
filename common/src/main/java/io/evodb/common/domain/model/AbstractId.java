@@ -32,7 +32,7 @@ public class AbstractId extends AssertionConcern implements Identity, Serializab
         setId(anId);
     }
 
-    public String id() {
+    public String getId() {
         return id;
     }
 

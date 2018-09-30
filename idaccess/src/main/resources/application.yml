@@ -1,0 +1,20 @@
+spring:
+  name: idaccess
+  datasource:
+    url: jdbc:mysql://localhost:3306/idaccess?characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+server:
+  port: 8080
+logging:
+  level:
+    root: DEBUG
+
