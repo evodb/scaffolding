@@ -69,6 +69,18 @@ public class Tenant extends JpaConcurrencySafeEntity {
         setName(aName);
     }
 
+    public void activate() {
+        if (!isActive()) {
+            setActive(true);
+        }
+    }
+
+    public void deactivate() {
+        if (isActive()) {
+            setActive(false);
+        }
+    }
+
     protected void setName(String aName) {
         assertArgumentNotNull(aName, "The name is required.");
         assertArgumentLength(aName, 1, 100, "The name must be 1 to 100 characters.");
@@ -76,7 +88,7 @@ public class Tenant extends JpaConcurrencySafeEntity {
     }
 
     protected void setTenantId(TenantId aTenantId) {
-        assertArgumentNotNull(aTenantId, "The tentant id is required.");
+        assertArgumentNotNull(aTenantId, "The Tenant id is required.");
         tenantId = aTenantId;
     }
 

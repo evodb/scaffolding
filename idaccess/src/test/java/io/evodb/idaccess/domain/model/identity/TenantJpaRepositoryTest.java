@@ -36,11 +36,11 @@ public class TenantJpaRepositoryTest {
     private TenantRepository tenantRepository;
 
     @Test
-    public void testAddTentant() {
+    public void testAddTenant() {
         TenantId tenantId = tenantRepository.nextIdentity();
         Tenant tenant = new Tenant(
             tenantId,
-            "testTentantName",
+            "testTenantName",
             "description",
             true);
         tenantRepository.add(tenant);
@@ -48,11 +48,11 @@ public class TenantJpaRepositoryTest {
     }
 
     @Test
-    public void testRemoveTentant() {
+    public void testRemoveTenant() {
         TenantId tenantId = tenantRepository.nextIdentity();
         Tenant tenant = new Tenant(
             tenantId,
-            "testTentantName",
+            "testTenantName",
             "description",
             true);
         tenantRepository.add(tenant);
@@ -61,11 +61,11 @@ public class TenantJpaRepositoryTest {
     }
 
     @Test
-    public void testRenameTentant() {
+    public void testRenameTenant() {
         TenantId tenantId = tenantRepository.nextIdentity();
         Tenant tenant = new Tenant(
             tenantId,
-            "testTentantName",
+            "testTenantName",
             "description",
             true);
         tenantRepository.add(tenant);
@@ -74,12 +74,29 @@ public class TenantJpaRepositoryTest {
         Assert.assertEquals("new tenant name", tenant.getName());
     }
 
-    @Test(expected = PersistenceException.class)
-    public void testTentantNameConflict() {
+    @Test
+    public void testTenantActive() {
         TenantId tenantId = tenantRepository.nextIdentity();
         Tenant tenant = new Tenant(
             tenantId,
-            "testTentantName",
+            "testTenantName",
+            "description",
+            true);
+        tenantRepository.add(tenant);
+
+        Assert.assertTrue(tenant.isActive());
+        tenant.deactivate();
+        Assert.assertFalse(tenant.isActive());
+        tenant.activate();
+        Assert.assertTrue(tenant.isActive());
+    }
+
+    @Test(expected = PersistenceException.class)
+    public void testTenantNameConflict() {
+        TenantId tenantId = tenantRepository.nextIdentity();
+        Tenant tenant = new Tenant(
+            tenantId,
+            "testTenantName",
             "description",
             true);
         tenantRepository.add(tenant);
@@ -87,18 +104,18 @@ public class TenantJpaRepositoryTest {
         TenantId otherTenantId = tenantRepository.nextIdentity();
         Tenant otherTenant = new Tenant(
             otherTenantId,
-            "testTentantName",
+            "testTenantName",
             "description",
             true);
         tenantRepository.add(otherTenant);
     }
 
     @Test(expected = PersistenceException.class)
-    public void testTentantIdConflict() {
+    public void testTenantIdConflict() {
         TenantId tenantId = tenantRepository.nextIdentity();
         Tenant tenant = new Tenant(
             tenantId,
-            "testTentantName",
+            "testTenantName",
             "description",
             true);
         tenantRepository.add(tenant);
