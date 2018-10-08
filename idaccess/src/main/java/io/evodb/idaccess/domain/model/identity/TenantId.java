@@ -20,10 +20,10 @@ package io.evodb.idaccess.domain.model.identity;
 import io.evodb.common.domain.model.AbstractId;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import lombok.NoArgsConstructor;
 
 @Embeddable
+@NoArgsConstructor
 public class TenantId extends AbstractId {
     private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class TenantId extends AbstractId {
 
     @Override
     @Column(name = "tenant_id")
-    public @NotNull @Size(max = 100) String getId() {
+    public String getId() {
         return super.getId();
     }
 }

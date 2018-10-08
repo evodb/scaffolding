@@ -22,15 +22,12 @@ import java.io.Serializable;
 
 
 public abstract class PersistibleDomainObject extends AssertionConcern implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     private long id;
 
     protected PersistibleDomainObject() {
-        setId(-1);
     }
 
-    public long getId() {
+    protected long getId() {
         return id;
     }
 

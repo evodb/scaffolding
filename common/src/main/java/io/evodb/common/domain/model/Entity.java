@@ -18,7 +18,6 @@
 package io.evodb.common.domain.model;
 
 public abstract class Entity extends PersistibleDomainObject {
-    private static final long serialVersionUID = 1L;
 
     protected Entity() {
         super();

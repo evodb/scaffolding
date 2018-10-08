@@ -28,6 +28,10 @@ public class AbstractId extends AssertionConcern implements Identity, Serializab
     private static final long serialVersionUID = 1L;
     private String id;
 
+    public AbstractId(){
+
+    }
+
     public AbstractId(String anId) {
         setId(anId);
     }

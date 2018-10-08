@@ -18,7 +18,6 @@
 package io.evodb.common.domain.model;
 
 public abstract class ConcurrencySafeEntity extends Entity {
-    private static final long serialVersionUID = 1L;
 
     private int concurrencyVersion;
 

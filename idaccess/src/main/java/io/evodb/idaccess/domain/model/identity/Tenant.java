@@ -17,39 +17,46 @@
 
 package io.evodb.idaccess.domain.model.identity;
 
-import io.evodb.idaccess.infrastructure.persistence.HibernateConcurrencySafeEngity;
+import io.evodb.idaccess.infrastructure.persistence.JpaConcurrencySafeEntity;
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
 
 @Entity
 @Validated
-public class Tenant extends HibernateConcurrencySafeEngity {
+@Table(uniqueConstraints = {
+    @UniqueConstraint(columnNames = "name"),
+    @UniqueConstraint(columnNames = "tenant_id")},
+    indexes = @Index(name = "idx_tenant_id", columnList = "tenant_id"))
+public class Tenant extends JpaConcurrencySafeEntity {
     private static final long serialVersionUID = 1L;
 
     @Setter
     @Getter
     private boolean active;
 
-    @Setter
     @Getter
-    private @Size(max = 100) String description;
+    private String description;
 
-    @Setter
     @Getter
-    private @Size(min = 1, max = 100) String name;
+    private String name;
+
+    @Getter
+    @Setter
+    @Column(updatable = false)
+    private Date createTime = new Date();
 
     @Embedded
-    @Setter
     @Getter
-    private @NotNull TenantId tenantId;
+    @Column(updatable = false)
+    private TenantId tenantId;
 
     public Tenant(TenantId aTenantId, String aName, String aDescription, boolean anActive) {
         setTenantId(aTenantId);
@@ -58,11 +65,25 @@ public class Tenant extends HibernateConcurrencySafeEngity {
         setDescription(aDescription);
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Override
-    public long getId() {
-        return super.getId();
+    public void rename(String aName) {
+        setName(aName);
     }
+
+    protected void setName(String aName) {
+        assertArgumentNotNull(aName, "The name is required.");
+        assertArgumentLength(aName, 1, 100, "The name must be 1 to 100 characters.");
+        name = aName;
+    }
+
+    protected void setTenantId(TenantId aTenantId) {
+        assertArgumentNotNull(aTenantId, "The tentant id is required.");
+        tenantId = aTenantId;
+    }
+
+    protected void setDescription(String aDescription) {
+        assertArgumentLength(aDescription, 100, "The description must be 100 characters or less.");
+        description = aDescription;
+    }
+
 
 }

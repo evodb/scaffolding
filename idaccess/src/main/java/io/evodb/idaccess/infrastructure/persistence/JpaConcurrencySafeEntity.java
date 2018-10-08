@@ -21,9 +21,11 @@ import io.evodb.common.domain.model.ConcurrencySafeEntity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-public class HibernateConcurrencySafeEngity extends ConcurrencySafeEntity {
+@MappedSuperclass
+public abstract class JpaConcurrencySafeEntity extends ConcurrencySafeEntity {
 
     @Version
     @Override
@@ -31,5 +33,12 @@ public class HibernateConcurrencySafeEngity extends ConcurrencySafeEntity {
         return super.getConcurrencyVersion();
     }
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Override
+    protected long getId() {
+        return super.getId();
+    }
 
 }
