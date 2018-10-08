@@ -3,7 +3,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/idaccess?characterEncoding=utf8
     username: root
-    password: 1234562
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     generate-ddl: true
