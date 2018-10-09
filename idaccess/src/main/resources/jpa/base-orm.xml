@@ -24,11 +24,13 @@
             </id>
         </attributes>
     </mapped-superclass>
+
     <mapped-superclass class="io.evodb.common.domain.model.ConcurrencySafeEntity">
         <attributes>
             <version name="concurrencyVersion"/>
         </attributes>
     </mapped-superclass>
+
     <mapped-superclass class="io.evodb.common.domain.model.AbstractId">
         <attributes>
             <basic name="id">

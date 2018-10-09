@@ -16,7 +16,6 @@
   ~
   -->
 
-
 <entity-mappings version="2.1"
                  xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -41,6 +40,5 @@
             </embedded>
         </attributes>
     </entity>
-
 
 </entity-mappings>
