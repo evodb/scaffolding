@@ -18,22 +18,13 @@
 package io.evodb.idaccess.domain.model.identity;
 
 import io.evodb.common.domain.model.AbstractId;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import lombok.NoArgsConstructor;
 
-@Embeddable
 @NoArgsConstructor
 public class TenantId extends AbstractId {
     private static final long serialVersionUID = 1L;
 
     public TenantId(String anId) {
         super(anId);
-    }
-
-    @Override
-    @Column(name = "tenant_id")
-    public String getId() {
-        return super.getId();
     }
 }

@@ -21,14 +21,11 @@ import io.evodb.common.AssertionConcern;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * @author ynfeng
- */
-public class AbstractId extends AssertionConcern implements Identity, Serializable {
+public abstract class AbstractId extends AssertionConcern implements Identity, Serializable {
     private static final long serialVersionUID = 1L;
     private String id;
 
-    public AbstractId(){
+    public AbstractId() {
 
     }
 
@@ -36,6 +33,7 @@ public class AbstractId extends AssertionConcern implements Identity, Serializab
         setId(anId);
     }
 
+    @Override
     public String getId() {
         return id;
     }

@@ -17,23 +17,18 @@
 
 package io.evodb.idaccess.domain.model.identity;
 
-import io.evodb.idaccess.infrastructure.persistence.JpaConcurrencySafeEntity;
+import io.evodb.common.domain.model.ConcurrencySafeEntity;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = "name"),
-    @UniqueConstraint(columnNames = "tenant_id")},
-    indexes = @Index(name = "idx_tenant_id", columnList = "tenant_id"))
-public class Tenant extends JpaConcurrencySafeEntity {
+//@Entity
+//@Table(uniqueConstraints = {
+//    @UniqueConstraint(columnNames = "name"),
+//    @UniqueConstraint(columnNames = "tenant_id")},
+//    indexes = @Index(name = "idx_tenant_id", columnList = "tenant_id"))
+public class Tenant extends ConcurrencySafeEntity {
     private static final long serialVersionUID = 1L;
 
     @Setter
@@ -48,12 +43,9 @@ public class Tenant extends JpaConcurrencySafeEntity {
 
     @Getter
     @Setter
-    @Column(updatable = false)
     private Date createTime;
 
-    @Embedded
     @Getter
-    @Column(updatable = false)
     private TenantId tenantId;
 
     public Tenant(TenantId aTenantId, String aName, String aDescription, boolean anActive) {

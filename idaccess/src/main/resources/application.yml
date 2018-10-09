@@ -13,6 +13,9 @@ spring:
     hibernate:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    mapping-resources:
+      - jpa/base-orm.xml
+      - jpa/identity-orm.xml
 server:
   port: 8080
 logging:
