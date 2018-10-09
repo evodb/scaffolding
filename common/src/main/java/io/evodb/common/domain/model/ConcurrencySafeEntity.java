@@ -25,11 +25,11 @@ public abstract class ConcurrencySafeEntity extends Entity {
         super();
     }
 
-    public int getConcurrencyVersion() {
+    protected int getConcurrencyVersion() {
         return concurrencyVersion;
     }
 
-    public void setConcurrencyVersion(int aVersion) {
+    protected void setConcurrencyVersion(int aVersion) {
         concurrencyVersion = aVersion;
     }
 

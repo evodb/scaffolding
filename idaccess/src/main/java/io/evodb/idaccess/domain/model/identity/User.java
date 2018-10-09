@@ -17,59 +17,53 @@
 
 package io.evodb.idaccess.domain.model.identity;
 
-import io.evodb.common.domain.model.ConcurrencySafeEntity;
+import io.evodb.idaccess.infrastructure.persistence.JpaConcurrencySafeEntity;
 import java.util.Date;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import lombok.Getter;
 
-
-public class User extends ConcurrencySafeEntity {
+@Entity
+@Table(indexes = @Index(name = "username", columnList = "username", unique = true))
+public class User extends JpaConcurrencySafeEntity {
     private static final long serialVersionUID = 1L;
 
+    @Getter
     private String username;
 
+    @Getter
     private String password;
 
+    @Getter
     private TenantId tenantId;
 
+    @Getter
     private Person person;
 
+    @Getter
     private boolean active;
 
+    @Getter
     private Date registerTime;
+
+    public User(TenantId aTenantId, String aUsername, String aPassword, boolean anActive) {
+        setTenantId(aTenantId);
+        setUsername(aUsername);
+        setPassword(aPassword);
+        setActive(anActive);
+        setRegisterTime(new Date());
+    }
 
     public User(TenantId aTenantId, String aUsername, String aPassword, Person aPerson, boolean anActive) {
         setTenantId(aTenantId);
         setUsername(aUsername);
         setPassword(aPassword);
-        setPerson(aPerson);
         setActive(anActive);
+        setPerson(aPerson);
         setRegisterTime(new Date());
     }
 
-    public String username() {
-        return username;
-    }
-
-    public String password() {
-        return password;
-    }
-
-    public TenantId tenantId() {
-        return tenantId;
-    }
-
-    public Person person() {
-        return person;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public Date registerTime() {
-        return registerTime;
-    }
 
     protected void setUsername(String aUsername) {
         assertArgumentNotNull(aUsername, "The username is required.");
@@ -98,12 +92,5 @@ public class User extends ConcurrencySafeEntity {
     private void setRegisterTime(Date aRegisterTime) {
         assertArgumentNotNull(registerTime, "The register time is required.");
         registerTime = aRegisterTime;
-    }
-
-    @Id
-    @GeneratedValue
-    @Override
-    protected void setId(long anId) {
-        super.setId(anId);
     }
 }

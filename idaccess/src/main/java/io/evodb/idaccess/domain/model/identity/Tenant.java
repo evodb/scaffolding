@@ -27,10 +27,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.validation.annotation.Validated;
 
 @Entity
-@Validated
 @Table(uniqueConstraints = {
     @UniqueConstraint(columnNames = "name"),
     @UniqueConstraint(columnNames = "tenant_id")},
@@ -51,7 +49,7 @@ public class Tenant extends JpaConcurrencySafeEntity {
     @Getter
     @Setter
     @Column(updatable = false)
-    private Date createTime = new Date();
+    private Date createTime;
 
     @Embedded
     @Getter
@@ -63,6 +61,7 @@ public class Tenant extends JpaConcurrencySafeEntity {
         setActive(anActive);
         setName(aName);
         setDescription(aDescription);
+        setCreateTime(new Date());
     }
 
     public void rename(String aName) {

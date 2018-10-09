@@ -29,7 +29,7 @@ public abstract class JpaConcurrencySafeEntity extends ConcurrencySafeEntity {
 
     @Version
     @Override
-    public int getConcurrencyVersion() {
+    protected int getConcurrencyVersion() {
         return super.getConcurrencyVersion();
     }
 
