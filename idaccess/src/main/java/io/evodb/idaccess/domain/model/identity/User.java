@@ -17,16 +17,11 @@
 
 package io.evodb.idaccess.domain.model.identity;
 
-import io.evodb.idaccess.infrastructure.persistence.JpaConcurrencySafeEntity;
+import io.evodb.common.domain.model.ConcurrencySafeEntity;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
 import lombok.Getter;
 
-@Entity
-@Table(indexes = @Index(name = "username", columnList = "username", unique = true))
-public class User extends JpaConcurrencySafeEntity {
+public class User extends ConcurrencySafeEntity {
     private static final long serialVersionUID = 1L;
 
     @Getter
